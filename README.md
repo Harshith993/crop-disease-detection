@@ -2,9 +2,9 @@
 
 AI-powered tomato leaf disease detection with severity assessment, treatment advisory, and an offline agronomy knowledge search.
 
-**Course** BCSE497J Project-I, VIT Vellore
-**Team** Idara Sree Harshith Chowdary (23BCI0142), Chintalapati Shriker Verma
-**Guide** Dr. Jaffar Ali Ibrahim S
+ Project-I,
+Idara Sree Harshith Chowdary 
+Chintalapati Shriker Verma
 
 ---
 
