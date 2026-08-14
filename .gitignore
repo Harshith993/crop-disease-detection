@@ -1,0 +1,29 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# Node
+node_modules/
+frontend/dist/
+
+# Dataset (reproducible from PlantVillage via training/prepare_data.py)
+data/raw/
+data/split/
+data/split38/
+data/*.zip
+data/split 2/
+
+# Superseded model artifacts
+backend/model/model.keras
+backend/model/model_original.keras
+backend/model/model_v2.keras
+backend/model/ood.pkl
+
+# OS
+.DS_Store
+*.log
+
+# Deployment bundle (generated, mirrors backend/ + frontend/dist)
+deploy/

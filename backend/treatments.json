@@ -1,0 +1,76 @@
+{
+  "Tomato___Early_blight": {
+    "display_name": "Tomato \u2014 Early Blight",
+    "pathogen": "Alternaria solani (fungus)",
+    "symptoms": "Dark brown spots with concentric rings ('target spots') on older, lower leaves, often surrounded by a yellow halo.",
+    "treatment": [
+      "Remove and destroy affected lower leaves; do not compost them.",
+      "Apply a protectant fungicide such as chlorothalonil or mancozeb at label rates, repeating every 7-10 days in wet weather.",
+      "Mulch around the base to stop soil splash carrying spores onto leaves.",
+      "Water at the soil line early in the day so foliage stays dry."
+    ],
+    "prevention": [
+      "Rotate tomatoes with non-solanaceous crops for 2-3 seasons.",
+      "Space plants for airflow and stake them off the ground.",
+      "Choose resistant cultivars where available."
+    ]
+  },
+  "Tomato___Late_blight": {
+    "display_name": "Tomato \u2014 Late Blight",
+    "pathogen": "Phytophthora infestans (oomycete)",
+    "symptoms": "Large greasy grey-green to brown blotches on leaves, often with white fuzzy growth on the underside in humid conditions. Spreads very fast.",
+    "treatment": [
+      "Act immediately - this disease can destroy a crop in days.",
+      "Remove and destroy infected plants entirely; do not leave debris in the field.",
+      "Apply a fungicide containing mancozeb, chlorothalonil, or copper as a protectant on remaining plants.",
+      "Avoid overhead irrigation until the outbreak is controlled."
+    ],
+    "prevention": [
+      "Plant certified disease-free seed and transplants.",
+      "Monitor closely during cool, wet, humid spells.",
+      "Destroy volunteer tomato and potato plants nearby."
+    ]
+  },
+  "Tomato___Bacterial_spot": {
+    "display_name": "Tomato \u2014 Bacterial Spot",
+    "pathogen": "Xanthomonas spp. (bacteria)",
+    "symptoms": "Small dark water-soaked spots on leaves that turn brown-black with yellow halos; raised scabby spots on fruit.",
+    "treatment": [
+      "Fungicides do not cure bacterial disease - use copper-based sprays to slow spread.",
+      "Remove severely infected plants to reduce inoculum.",
+      "Stop working among plants while foliage is wet, which spreads bacteria by contact.",
+      "Sanitise tools and stakes between plants."
+    ],
+    "prevention": [
+      "Use pathogen-free seed; hot-water treat seed if saving your own.",
+      "Rotate away from tomato and pepper for at least one year.",
+      "Avoid overhead watering entirely where possible."
+    ]
+  },
+  "Tomato___healthy": {
+    "display_name": "Healthy Leaf",
+    "pathogen": "None detected",
+    "symptoms": "No disease symptoms detected. Leaf shows uniform green colouration.",
+    "treatment": [
+      "No treatment required.",
+      "Continue routine monitoring, especially on lower leaves after rain."
+    ],
+    "prevention": [
+      "Maintain balanced fertilisation and consistent watering.",
+      "Keep inspecting weekly - early detection is what keeps a crop healthy."
+    ]
+  },
+  "Other___not_tomato": {
+    "display_name": "Not a tomato leaf",
+    "pathogen": "Outside the scope of this system",
+    "symptoms": "This image does not appear to be a tomato leaf. The detection model is trained on four tomato leaf conditions only, so it cannot diagnose other crops.",
+    "treatment": [
+      "Upload a close-up photograph of a single tomato leaf against a plain background.",
+      "For other crops, consult a local agricultural extension officer or a crop-specific diagnostic service."
+    ],
+    "prevention": [
+      "Photograph one leaf at a time, filling most of the frame.",
+      "Use even daylight and avoid shadows or busy backgrounds."
+    ]
+  }
+}
