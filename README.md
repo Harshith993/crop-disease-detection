@@ -1,24 +1,22 @@
 # Crop Disease Detection
 
-AI-powered leaf,fruits and vegetables disease detection with severity assessment, treatment advisory, and an offline agronomy knowledge search.
+AI-powered crop disease detection across 14 species, with severity assessment, treatment advisory, and an offline agronomy knowledge search.
 
-Project-I,
- 
-Idara Sree Harshith Chowdary 
-
-Chintalapati Shriker Verma
+**Course** BCSE497J Project-I, VIT Vellore
+**Team** Idara Sree Harshith Chowdary (23BCI0142), Chintalapati Shriker Verma
+**Guide** Dr. Jaffar Ali Ibrahim S
 
 ---
 
 ## What it does
 
-Upload a photograph of a leaf or fruit. The system returns:
+Upload a photograph of a leaf. The system returns:
 
-- a **diagnosis** across all conditions, or an out-of-scope notice
+- a **diagnosis** across 38 conditions spanning 14 crop species
 - a **confidence** score, with a warning below 60%
 - a **severity** reading (Mild / Moderate / Severe) derived from lesion area
 - a **treatment sequence** and prevention guidance for the identified disease
-- **class probabilities** for every category, so the margin is visible
+- **class probabilities**, so the margin between candidates is visible
 
 A separate search bar answers typed questions about crops, leaves, pests, nutrition and soil from a trained retrieval index that runs entirely offline.
 
@@ -26,33 +24,49 @@ A separate search bar answers typed questions about crops, leaves, pests, nutrit
 
 | Metric | Value |
 |---|---|
-| Test accuracy | **97.74%** (1,239 held-out images) |
-| End-to-end accuracy through the API | 96.37% |
-| Classes | 5 |
-| Training images | 8,237 |
-| Median inference latency | 43 ms (CPU) |
-| Model size | 23.9 MB |
+| Validation accuracy | **93.67%** (4,770 held-out images) |
+| Macro average F1 | 0.9355 |
+| Weighted average F1 | 0.9365 |
+| Classes | 38 |
+| Crop species | 14 |
+| Training images | 31,898 |
+| Model size | 26.5 MB |
 | Automated tests | 22 passing |
 
-| Class | Precision | Recall | F1 |
-|---|---|---|---|
-| Other (not tomato) | 0.9796 | 0.9917 | 0.9856 |
-| Tomato Bacterial spot | 0.9755 | 0.9938 | 0.9845 |
-| Tomato Early blight | 0.9784 | 0.9067 | 0.9412 |
-| Tomato Late blight | 0.9686 | 0.9686 | 0.9686 |
-| Tomato Healthy | 0.9876 | 0.9958 | 0.9917 |
+### Coverage by crop
 
-Full testing report: `docs/phase6_testing.md`
+| Crop | Conditions detected |
+|---|---|
+| Apple | Scab, Black rot, Cedar apple rust, Healthy |
+| Blueberry | Healthy |
+| Cherry | Powdery mildew, Healthy |
+| Corn | Gray leaf spot, Common rust, Northern leaf blight, Healthy |
+| Grape | Black rot, Esca (black measles), Leaf blight, Healthy |
+| Orange | Citrus greening (huanglongbing) |
+| Peach | Bacterial spot, Healthy |
+| Bell pepper | Bacterial spot, Healthy |
+| Potato | Early blight, Late blight, Healthy |
+| Raspberry | Healthy |
+| Soybean | Healthy |
+| Squash | Powdery mildew |
+| Strawberry | Leaf scorch, Healthy |
+| Tomato | Bacterial spot, Early blight, Late blight, Leaf mold, Septoria leaf spot, Spider mites, Target spot, Yellow leaf curl virus, Mosaic virus, Healthy |
+
+### Notable per-class results
+
+Perfect or near-perfect (F1 ≥ 0.98): Corn healthy, Grape leaf blight, Orange citrus greening, Strawberry leaf scorch, Cherry powdery mildew, Peach bacterial spot, Apple black rot, Squash powdery mildew.
+
+Weakest classes: Corn gray leaf spot (0.75 recall) and Tomato early blight (0.77 recall). Both produce subtle lesion patterns that are easily confused with visually similar diseases on the same crop.
 
 ## Stack
 
 | Layer | Technology |
 |---|---|
-| Model | MobileNetV2 transfer learning, TensorFlow 2.20 / Keras 3 |
+| Model | MobileNetV2 transfer learning, TensorFlow / Keras 3 |
 | Backend | Flask REST API, Pillow, NumPy |
 | Knowledge search | TF-IDF vector index, scikit-learn |
-| Frontend | React 19 (Vite), IBM Plex type system |
-| Dataset | PlantVillage (colour subset) |
+| Frontend | React 19 (Vite), Manrope type system |
+| Datasets | PlantVillage (laboratory) + PlantDoc (field photographs) |
 
 ## Setup
 
@@ -98,7 +112,7 @@ The second command should print nothing before you start a new server.
 ./rebuild.sh
 ```
 
-This builds the frontend and inlines CSS and JavaScript into a single HTML file, which Flask then serves from `/`. Everything then runs on one port, so the whole application can be exposed through a single tunnel. Use `npm run build` alone if you want conventional separate asset files.
+This builds the frontend and inlines CSS and JavaScript into a single HTML file, which Flask then serves from `/`. Everything then runs on one port, so the whole application can be exposed through a single tunnel.
 
 ## API
 
@@ -121,15 +135,17 @@ curl --get --data-urlencode "q=why are my leaves yellow" http://localhost:5001/a
 
 ## How it works
 
-**Classification.** MobileNetV2 pretrained on ImageNet, with a custom head (global average pooling, dropout, a 128-unit dense layer, 5-way softmax). Trained in two phases: the head alone at learning rate 1e-3, then the last 50 base layers at 2e-5. BatchNorm layers stay frozen throughout. Class weights compensate for imbalance; early stopping restores the best epoch.
+**Classification.** MobileNetV2 pretrained on ImageNet, with a custom head (global average pooling, dropout, a 256-unit dense layer, 38-way softmax). Trained in two phases: the head alone at learning rate 1e-3 for 12 epochs, then the last 60 base layers at 2e-5 for 20 epochs. BatchNorm layers stay frozen throughout.
 
-Pixel rescaling to [-1, 1] is a `Rescaling` layer **inside** the model rather than a preprocessing step outside it. This means the API sends raw 0–255 arrays and cannot introduce a train/serve mismatch. A `Lambda(preprocess_input)` layer was tried first and could not be serialised under Keras 3.
+Pixel rescaling to [-1, 1] is a `Rescaling` layer **inside** the model rather than a preprocessing step outside it. This means the API sends raw 0–255 arrays and cannot introduce a train/serve mismatch.
 
-**Plant-tissue guard.** Before inference, the image is checked for green plant tissue by HSV thresholding. Non-plant input is rejected with HTTP 422 instead of being classified. This exists because softmax always distributes probability across known classes and cannot express that an input belongs to none of them.
+**Dataset construction.** `training/build_multicrop.py` merges two sources: PlantVillage laboratory images (capped at 900 per class to limit imbalance) and PlantDoc field photographs mapped onto matching PlantVillage classes. The combination is deliberate — PlantVillage supplies volume and clean labels, PlantDoc supplies real-world backgrounds, lighting and occlusion.
 
-**Severity.** HSV thresholding separates lesion pixels from healthy leaf tissue and reports the affected area as a percentage, binned into Mild / Moderate / Severe. This is a colour-area estimate, not learned segmentation.
+**Plant-tissue guard.** Before inference the image is checked for green plant tissue by HSV thresholding. Non-plant input is rejected with HTTP 422 instead of being classified.
 
-**Knowledge search.** `train_qa.py` fits a TF-IDF vectoriser over 30 curated agronomy passages, weighting titles and example query phrasings above body text, and saves a 129 KB index. Queries are ranked by cosine similarity; below a similarity of 0.10 the system declines to answer rather than returning a poor match.
+**Severity.** HSV thresholding separates lesion pixels from healthy leaf tissue and reports the affected area as a percentage, binned into Mild / Moderate / Severe. This is a colour-area estimate, not learned segmentation. Healthy classes bypass it entirely.
+
+**Knowledge search.** `train_qa.py` fits a TF-IDF vectoriser over 30 curated agronomy passages, weighting titles and example query phrasings above body text. Queries are ranked by cosine similarity; below 0.10 the system declines to answer rather than returning a poor match.
 
 ## Project structure
 
@@ -141,34 +157,44 @@ agrovision/
 │   ├── qa.py                retrieval question answering
 │   ├── train_qa.py          fits the TF-IDF index
 │   ├── test_api.py          22 automated tests
-│   ├── treatments.json      treatment knowledge base
+│   ├── treatments.json      treatment knowledge base, 38 entries
 │   ├── knowledge/           agronomy passages and query augmentation
-│   └── model/               model_v3.keras, class_names.json, qa_index.pkl
+│   └── model/               model_v4.keras, class_names.json, qa_index.pkl
 ├── frontend/src/            React application
-├── training/                data preparation, training, evaluation
-├── data/split/              train / val / test image folders
+├── training/
+│   ├── build_multicrop.py   merges PlantVillage + PlantDoc into 38 classes
+│   ├── plantdoc_baseline.py measures lab-to-field accuracy gap
+│   ├── train.py             model training
+│   └── evaluate.py          evaluation and confusion matrix
+├── data/                    datasets (gitignored, rebuilt from source)
 ├── docs/                    test report, confusion matrix, screenshots
 └── rebuild.sh               production build with inlined assets
 ```
 
-## Limitations
+## Development history
 
-1. **Closed-set classification.** Six further tomato diseases in PlantVillage — septoria leaf spot, leaf mold, target spot, spider mite damage, mosaic virus and yellow leaf curl virus — are not covered and would be assigned to one of the four trained conditions.
-2. **Out-of-distribution inputs.** The Other class reliably rejects non-tomato leaves photographed in the PlantVillage style (99.2%), but does not generalise to arbitrary imagery. A stock photograph of a rotting lettuce head was classified as late blight at 99.9% confidence, because collapsed brown leaf tissue is genuinely close to late blight in feature space. A Mahalanobis distance detector was tested against this case and did not separate it.
-3. **Potato and pepper** were deliberately excluded from the Other class, since potato early and late blight are caused by the same pathogens as their tomato counterparts. Those leaves are therefore not rejected.
-4. **Early blight recall (90.7%)** is the weakest class; most errors are confusions with late blight, which shares brown necrotic lesion morphology.
-5. **Severity saturates** near 100% on fully necrotic leaves, and 10 such leaves (0.81% of the test set) are refused outright by the plant-tissue guard.
-6. **Lab-condition training data.** PlantVillage images have uniform backgrounds; accuracy on field photographs would be lower.
-7. **Retrieval-only search.** The knowledge search returns the best-matching stored passage and cannot synthesise across passages or answer outside its 30 topics.
+**v1–v2 (4 classes).** Tomato only — bacterial spot, early blight, late blight, healthy. 96.49% test accuracy.
+
+**v3 (5 classes).** Added an `Other___not_tomato` rejection class trained on 1,610 images from 23 non-tomato PlantVillage crops. Test accuracy rose to 97.74%, and the extra class improved the tomato classes rather than competing with them — requiring the network to separate tomato from other species appears to have sharpened its representation of tomato leaf tissue.
+
+**v4 (38 classes, current).** Expanded to every PlantVillage class across 14 species, with PlantDoc field photographs merged in. Validation accuracy 93.67%. The drop from v3's 97.74% reflects a far harder problem — 38 classes instead of 5, including visually similar diseases within the same crop.
+
+## Known limitations
+
+1. **Closed-set classification.** A leaf from a species outside the 14 trained crops is assigned to the closest matching class rather than rejected. v3 had an explicit reject class; v4 does not, because every available crop is now a diagnosable class in its own right. Restoring a reject class would require sourcing images genuinely outside PlantVillage.
+2. **Confusable pairs.** Corn gray leaf spot and tomato early blight are the weakest classes, most often confused with visually similar diseases on the same crop.
+3. **Dataset shift.** A baseline evaluation of the tomato-only v3 model against PlantDoc field photographs measured 75.4% against 97.7% on laboratory images, with the healthy class failing entirely. v4 mitigates this by training on both sources, but laboratory imagery still dominates by volume.
+4. **Severity is colour-based**, not learned segmentation, and saturates near 100% on fully necrotic leaves.
+5. **Retrieval-only search.** The knowledge search returns the best-matching stored passage and cannot synthesise across passages or answer outside its 30 topics.
 
 ## Future work
 
-- **Multi-crop coverage.** PlantVillage contains 38 classes across 14 crop species. The architecture extends to this without design change, requiring only retraining and an expanded treatment knowledge base.
-- **Field-condition data.** Training on PlantDoc or similar field photography to address the lab-condition limitation.
+- **Reject class for unknown species**, trained on plant imagery outside the 14 covered crops.
+- **Field-condition emphasis.** Weighting or oversampling PlantDoc images during training to close the remaining lab-to-field gap.
 - **Learned severity.** Replacing colour thresholding with a segmentation model.
 - **Mobile deployment.** TensorFlow Lite conversion for offline on-device inference.
 - **Cloud deployment.** Static frontend hosting with a containerised inference backend.
 
 ## Attribution
 
-Dataset: PlantVillage, Hughes and Salathé (2015). Treatment guidance is advisory only; confirm with a local agricultural extension officer before applying any chemical treatment.
+Datasets: PlantVillage (Hughes and Salathé, 2015) and PlantDoc (Singh et al., 2020, CC BY 4.0). Treatment guidance is advisory only; confirm with a local agricultural extension officer before applying any chemical treatment.

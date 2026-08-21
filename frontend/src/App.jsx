@@ -10,6 +10,37 @@ const EXAMPLES = [
   "Tiny white flies on my plants",
 ];
 
+const CROPS = [
+  { crop: "Apple", items: ["Scab", "Black rot", "Cedar apple rust", "Healthy"] },
+  { crop: "Blueberry", items: ["Healthy"] },
+  { crop: "Cherry", items: ["Powdery mildew", "Healthy"] },
+  { crop: "Corn", items: ["Gray leaf spot", "Common rust", "Northern leaf blight", "Healthy"] },
+  { crop: "Grape", items: ["Black rot", "Esca (black measles)", "Leaf blight", "Healthy"] },
+  { crop: "Orange", items: ["Citrus greening"] },
+  { crop: "Peach", items: ["Bacterial spot", "Healthy"] },
+  { crop: "Bell pepper", items: ["Bacterial spot", "Healthy"] },
+  { crop: "Potato", items: ["Early blight", "Late blight", "Healthy"] },
+  { crop: "Raspberry", items: ["Healthy"] },
+  { crop: "Soybean", items: ["Healthy"] },
+  { crop: "Squash", items: ["Powdery mildew"] },
+  { crop: "Strawberry", items: ["Leaf scorch", "Healthy"] },
+  {
+    crop: "Tomato",
+    items: [
+      "Bacterial spot",
+      "Early blight",
+      "Late blight",
+      "Leaf mold",
+      "Septoria leaf spot",
+      "Spider mites",
+      "Target spot",
+      "Yellow leaf curl virus",
+      "Mosaic virus",
+      "Healthy",
+    ],
+  },
+];
+
 export default function App() {
   const [file, setFile] = useState(null);
   const [preview, setPreview] = useState(null);
@@ -28,6 +59,7 @@ export default function App() {
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [signInOpen, setSignInOpen] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
+  const [capsOpen, setCapsOpen] = useState(false);
 
   const isTouch =
     typeof window !== "undefined" && window.matchMedia("(pointer: coarse)").matches;
@@ -55,6 +87,7 @@ export default function App() {
         setSettingsOpen(false);
         setSignInOpen(false);
         setAboutOpen(false);
+        setCapsOpen(false);
       }
     }
     window.addEventListener("keydown", onKey);
@@ -189,7 +222,7 @@ export default function App() {
             <button className="nav-link" onClick={() => setAboutOpen(true)}>
               About
             </button>
-            <button className="nav-link" onClick={() => ask("what can this system detect")}>
+            <button className="nav-link" onClick={() => setCapsOpen(true)}>
               Capabilities
             </button>
             <button className="nav-link" onClick={() => setSettingsOpen(true)}>
@@ -484,6 +517,49 @@ export default function App() {
           )}
         </main>
       </div>
+
+      {capsOpen && (
+        <div className="scrim" onClick={() => setCapsOpen(false)}>
+          <div className="sheet" onClick={(e) => e.stopPropagation()} role="dialog" aria-label="Capabilities">
+            <div className="sheet-head">
+              <h2>Capabilities</h2>
+              <button className="icon-btn" onClick={() => setCapsOpen(false)} aria-label="Close">
+                <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" /></svg>
+              </button>
+            </div>
+
+            <p className="body">
+              38 conditions across 14 crop species. Upload a leaf from any of these and the
+              model will identify the condition, estimate severity, and recommend treatment.
+            </p>
+
+            <div className="about-grid">
+              <div><strong>38</strong><span>Conditions</span></div>
+              <div><strong>14</strong><span>Crops</span></div>
+              <div><strong>93.7%</strong><span>Accuracy</span></div>
+              <div><strong>31,898</strong><span>Images</span></div>
+            </div>
+
+            <div className="caps-list">
+              {CROPS.map((c) => (
+                <div className="caps-row" key={c.crop}>
+                  <p className="caps-crop">{c.crop}</p>
+                  <div className="caps-tags">
+                    {c.items.map((i) => (
+                      <span key={i} className={i === "Healthy" ? "tag ok" : "tag"}>{i}</span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <p className="sheet-foot">
+              A leaf from a species outside these 14 will be matched to the closest class rather
+              than rejected.
+            </p>
+          </div>
+        </div>
+      )}
 
       {aboutOpen && (
         <div className="scrim" onClick={() => setAboutOpen(false)}>

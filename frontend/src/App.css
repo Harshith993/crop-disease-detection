@@ -642,3 +642,47 @@ body { font-size: 15.5px; letter-spacing: -0.011em; }
   50%  { background-position: 100% center; }
   100% { background-position: 0% center; }
 }
+
+/* ============ capabilities dialog ============ */
+.caps-list {
+  margin-top: 22px;
+  padding-top: 4px;
+}
+.caps-row {
+  display: grid;
+  grid-template-columns: 92px 1fr;
+  gap: 14px;
+  align-items: start;
+  padding: 11px 0;
+  border-top: 1px solid var(--line-2);
+}
+.caps-crop {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  padding-top: 2px;
+}
+.caps-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.tag {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 999px;
+  color: var(--text-2);
+  background: var(--surface-2);
+  white-space: nowrap;
+}
+.tag.ok {
+  color: var(--mild);
+  background: color-mix(in srgb, var(--mild) 12%, transparent);
+}
+
+@media (max-width: 560px) {
+  .caps-row { grid-template-columns: 1fr; gap: 8px; }
+  .caps-crop { padding-top: 0; }
+}
