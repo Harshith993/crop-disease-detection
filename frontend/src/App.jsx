@@ -425,7 +425,7 @@ export default function App() {
 
                     {outOfScope && (
                       <p className="alert warn">
-                        Not a tomato leaf. This system covers four tomato conditions only.
+                        Unexpected result. This crop or condition may be outside the 38 the model was trained on.
                       </p>
                     )}
                     {!outOfScope && result.prediction.low_confidence && (
@@ -502,39 +502,38 @@ export default function App() {
             </p>
 
             <div className="about-grid">
-              <div><strong>97.7%</strong><span>Test accuracy</span></div>
-              <div><strong>8,237</strong><span>Training images</span></div>
-              <div><strong>5</strong><span>Classes</span></div>
-              <div><strong>43 ms</strong><span>Inference</span></div>
+              <div><strong>93.7%</strong><span>Validation accuracy</span></div>
+              <div><strong>31,898</strong><span>Training images</span></div>
+              <div><strong>38</strong><span>Classes</span></div>
+              <div><strong>14</strong><span>Crop species</span></div>
             </div>
 
             <div className="about-block">
               <p className="kicker">What it detects</p>
               <ul className="bullets">
-                <li>Tomato bacterial spot &mdash; Xanthomonas</li>
-                <li>Tomato early blight &mdash; Alternaria solani</li>
-                <li>Tomato late blight &mdash; Phytophthora infestans</li>
-                <li>Healthy tomato leaves</li>
-                <li>Leaves that are not tomato, flagged as out of scope</li>
+                <li>Apple &mdash; scab, black rot, cedar apple rust</li>
+                <li>Corn, grape, potato &mdash; 3 conditions each</li>
+                <li>Tomato &mdash; 9 conditions including both blights, viruses and mites</li>
+                <li>Cherry, peach, pepper, squash and citrus greening</li>
+                <li>Healthy-leaf detection across all 14 species</li>
               </ul>
             </div>
 
             <div className="about-block">
               <p className="kicker">How it works</p>
               <p className="body">
-                MobileNetV2 pretrained on ImageNet, fine-tuned on PlantVillage in two phases.
-                Before inference the image is checked for green plant tissue, so non-plant photos
-                are refused rather than classified. Severity comes from HSV lesion-area
-                thresholding. The knowledge search is a TF-IDF index over 30 curated agronomy
-                passages and runs entirely offline.
+                MobileNetV2 pretrained on ImageNet, fine-tuned in two phases on a combined
+                dataset of PlantVillage laboratory images and PlantDoc real-world field photos.
+                Severity comes from HSV lesion-area thresholding. The knowledge search is a
+                TF-IDF index over 30 curated agronomy passages and runs entirely offline.
               </p>
             </div>
 
             <div className="about-block">
               <p className="kicker">Limitations</p>
               <ul className="bullets">
-                <li>Six further tomato diseases are not covered and would be misassigned.</li>
-                <li>Trained on lab-condition imagery; field photographs are harder.</li>
+                <li>Leaves from crops outside the 14 trained species are misassigned to the closest match.</li>
+                <li>Weaker on visually similar conditions such as corn gray leaf spot and tomato early blight.</li>
                 <li>Severity is a colour estimate, not learned segmentation.</li>
                 <li>Advisory only. Confirm with an extension officer before applying chemicals.</li>
               </ul>
@@ -598,7 +597,7 @@ export default function App() {
             <div className="setting column">
               <div>
                 <p>Model</p>
-                <span>MobileNetV2 · 5 classes · 97.7% test accuracy</span>
+                <span>MobileNetV2 · 38 classes · 93.7% validation accuracy</span>
               </div>
             </div>
 

@@ -27,3 +27,6 @@ backend/model/ood.pkl
 
 # Deployment bundle (generated, mirrors backend/ + frontend/dist)
 deploy/
+data/multicrop/
+data/plantdoc/
+data/PlantDoc-Dataset-master/
