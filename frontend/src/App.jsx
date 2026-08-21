@@ -237,9 +237,9 @@ export default function App() {
         <main className={`stage ${started ? "engaged" : ""}`}>
           <section className="hero">
             <h1>
-              <span className="grad">Crop disease detection</span>
+              <span className="grad">Crop Disease Detector</span>
             </h1>
-            <p className="sub">Upload a tomato leaf, or ask about crops and pests</p>
+            <p className="sub">Upload a fruit, vegetable or leaf, or ask about crops and pests</p>
 
             <div className="composer">
               <button
