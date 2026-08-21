@@ -1,8 +1,8 @@
 # Crop Disease Detection
 
-AI-powered tomato leaf disease detection with severity assessment, treatment advisory, and an offline agronomy knowledge search.
+AI-powered leaf,fruits and vegetables disease detection with severity assessment, treatment advisory, and an offline agronomy knowledge search.
 
- Project-I,
+Project-I,
  
 Idara Sree Harshith Chowdary 
 
@@ -12,9 +12,9 @@ Chintalapati Shriker Verma
 
 ## What it does
 
-Upload a photograph of a tomato leaf. The system returns:
+Upload a photograph of a leaf or fruit. The system returns:
 
-- a **diagnosis** across four tomato conditions, or an out-of-scope notice
+- a **diagnosis** across all conditions, or an out-of-scope notice
 - a **confidence** score, with a warning below 60%
 - a **severity** reading (Mild / Moderate / Severe) derived from lesion area
 - a **treatment sequence** and prevention guidance for the identified disease
