@@ -39,6 +39,11 @@ const CROPS = [
       "Healthy",
     ],
   },
+  { crop: "Apple (fruit)", items: ["Blotch", "Rot", "Scab", "Healthy"] },
+  { crop: "Guava (fruit)", items: ["Anthracnose", "Fruit fly damage", "Healthy"] },
+  { crop: "Mango (fruit)", items: ["Alternaria", "Anthracnose", "Black mould rot", "Stem end rot", "Healthy"] },
+  { crop: "Orange (fruit)", items: ["Black spot", "Canker", "Greening", "Healthy"] },
+  { crop: "Pomegranate (fruit)", items: ["Alternaria", "Anthracnose", "Bacterial blight", "Cercospora", "Healthy"] },
 ];
 
 export default function App() {
@@ -529,15 +534,15 @@ export default function App() {
             </div>
 
             <p className="body">
-              38 conditions across 14 crop species. Upload a leaf from any of these and the
+              59 conditions across 14 crop species, covering both leaf and fruit disease. Upload a photo
               model will identify the condition, estimate severity, and recommend treatment.
             </p>
 
             <div className="about-grid">
-              <div><strong>38</strong><span>Conditions</span></div>
+              <div><strong>59</strong><span>Conditions</span></div>
               <div><strong>14</strong><span>Crops</span></div>
-              <div><strong>93.7%</strong><span>Accuracy</span></div>
-              <div><strong>31,898</strong><span>Images</span></div>
+              <div><strong>94.0%</strong><span>Accuracy</span></div>
+              <div><strong>39,537</strong><span>Images</span></div>
             </div>
 
             <div className="caps-list">
@@ -572,15 +577,15 @@ export default function App() {
             </div>
 
             <p className="body">
-              A tomato leaf disease detector. Upload a photograph of a leaf and it identifies the
+              A multi-crop disease detector for leaves and select fruits. Upload a photograph and it identifies the
               condition, estimates how much of the leaf is affected, and gives a treatment
               sequence. A separate search answers questions about crops, pests, nutrition and soil.
             </p>
 
             <div className="about-grid">
-              <div><strong>93.7%</strong><span>Validation accuracy</span></div>
-              <div><strong>31,898</strong><span>Training images</span></div>
-              <div><strong>38</strong><span>Classes</span></div>
+              <div><strong>94.0%</strong><span>Validation accuracy</span></div>
+              <div><strong>39,537</strong><span>Training images</span></div>
+              <div><strong>59</strong><span>Classes</span></div>
               <div><strong>14</strong><span>Crop species</span></div>
             </div>
 
@@ -591,7 +596,8 @@ export default function App() {
                 <li>Corn, grape, potato &mdash; 3 conditions each</li>
                 <li>Tomato &mdash; 9 conditions including both blights, viruses and mites</li>
                 <li>Cherry, peach, pepper, squash and citrus greening</li>
-                <li>Healthy-leaf detection across all 14 species</li>
+                <li>Fruit diagnosis for apple, guava, mango, orange and pomegranate</li>
+    <li>Healthy detection across all 14 leaf species and 5 fruits</li>
               </ul>
             </div>
 
@@ -608,9 +614,11 @@ export default function App() {
             <div className="about-block">
               <p className="kicker">Limitations</p>
               <ul className="bullets">
-                <li>Leaves from crops outside the 14 trained species are misassigned to the closest match.</li>
+                <li>Leaves or fruit from crops outside the trained categories are misassigned to the closest match.</li>
                 <li>Weaker on visually similar conditions such as corn gray leaf spot and tomato early blight.</li>
-                <li>Severity is a colour estimate, not learned segmentation.</li>
+                <li>Fruit-disease classes have less training data than leaf classes, particularly
+      mango (as few as 70-100 images per class).</li>
+    <li>Severity is a colour estimate, not learned segmentation.</li>
                 <li>Advisory only. Confirm with an extension officer before applying chemicals.</li>
               </ul>
             </div>
@@ -673,7 +681,7 @@ export default function App() {
             <div className="setting column">
               <div>
                 <p>Model</p>
-                <span>MobileNetV2 · 38 classes · 93.7% validation accuracy</span>
+                <span>MobileNetV2 · 59 classes · 94.0% validation accuracy</span>
               </div>
             </div>
 

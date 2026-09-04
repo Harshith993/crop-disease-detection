@@ -7,7 +7,7 @@ import tensorflow as tf
 
 from severity import estimate_severity, leaf_coverage, green_fraction
 
-MODEL_PATH = os.path.join("model", "model_v4.keras" if os.path.exists(os.path.join("model","model_v4.keras")) else "model_v3.keras")
+MODEL_PATH = os.path.join("model", "model_v5.keras" if os.path.exists(os.path.join("model","model_v5.keras")) else "model_v4.keras")
 IMG_SIZE = (224, 224)
 MAX_MB = 8
 ALLOWED = {"image/jpeg", "image/png", "image/webp"}

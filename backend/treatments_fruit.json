@@ -1,0 +1,292 @@
+{
+  "Apple_fruit___Blotch": {
+    "display_name": "Apple Fruit Blotch",
+    "pathogen": "Botryosphaeria obtusa or Colletotrichum spp. (fungal complex)",
+    "symptoms": "Dark, irregular, olive-to-black blotches on the fruit skin that enlarge and merge, often with a slightly sunken or rough texture. Frequently develops on fruit close to harvest.",
+    "treatment": [
+      "Remove and discard visibly blotched fruit; do not store it with healthy fruit since the fungus spreads in storage.",
+      "Apply a fungicide programme (captan or a strobilurin) during the growing season, timed to cover the pre-harvest period.",
+      "Improve air circulation around fruit by thinning dense canopy growth."
+    ],
+    "prevention": [
+      "Prune out dead or cankered wood each dormant season, which harbours the fungus over winter.",
+      "Harvest promptly at maturity rather than leaving fruit on the tree.",
+      "Avoid bruising fruit during picking and handling, since wounds are common infection points."
+    ]
+  },
+  "Apple_fruit___Rot": {
+    "display_name": "Apple Fruit Rot",
+    "pathogen": "Botryosphaeria and Colletotrichum species (bitter rot complex)",
+    "symptoms": "Soft, sunken, circular brown lesions on the fruit surface that expand concentrically, sometimes with visible spore masses in the centre under humid conditions.",
+    "treatment": [
+      "Discard rotted fruit immediately; it is not safe to eat and will spread spores to sound fruit in storage.",
+      "Apply a protective fungicide programme through summer, particularly after wounding events like hail or insect damage.",
+      "Cool harvested fruit promptly, since rot develops fastest at warm storage temperatures."
+    ],
+    "prevention": [
+      "Remove mummified fruit and dead wood from the orchard each winter.",
+      "Handle fruit carefully to avoid the small wounds that let the fungus enter.",
+      "Store fruit at low temperature and inspect regularly, removing any rotting fruit at once."
+    ]
+  },
+  "Apple_fruit___Scab": {
+    "display_name": "Apple Fruit Scab",
+    "pathogen": "Venturia inaequalis (fungus)",
+    "symptoms": "Rough, corky, olive-to-brown scabbed patches on the fruit skin, often with cracking as the fruit expands. The same fungus that causes leaf scab.",
+    "treatment": [
+      "Fruit already scabbed cannot be cured; the goal is to protect the remaining crop.",
+      "Apply a protectant fungicide (captan or myclobutanil) starting at bloom and continuing through early summer.",
+      "Remove and destroy fallen leaves in autumn, since the fungus overwinters there and reinfects fruit the following season."
+    ],
+    "prevention": [
+      "Plant scab-resistant apple varieties where replanting is an option.",
+      "Rake and dispose of fallen leaves every autumn without exception.",
+      "Prune for an open canopy so fruit and foliage dry quickly after rain."
+    ]
+  },
+  "Apple_fruit___healthy": {
+    "display_name": "Healthy Apple Fruit",
+    "pathogen": "No disease detected",
+    "symptoms": "Smooth, evenly coloured skin with no blotching, rot, or scabbed patches.",
+    "treatment": ["No treatment needed. Continue regular monitoring."],
+    "prevention": [
+      "Maintain a preventive fungicide schedule through the growing season in disease-prone regions.",
+      "Harvest promptly and handle fruit gently to avoid wounds that invite infection."
+    ]
+  },
+  "Guava_fruit___Anthracnose": {
+    "display_name": "Guava Anthracnose",
+    "pathogen": "Colletotrichum gloeosporioides (fungus)",
+    "symptoms": "Small, water-soaked spots on the fruit that enlarge into sunken, dark brown to black lesions, often with pink spore masses visible in humid weather. Commonly appears as fruit ripens.",
+    "treatment": [
+      "Remove and destroy infected fruit; the fungus spreads readily to sound fruit in storage.",
+      "Apply a copper-based or systemic fungicide during flowering and fruit development, particularly in wet seasons.",
+      "Harvest fruit promptly at maturity rather than allowing overripening on the tree."
+    ],
+    "prevention": [
+      "Prune to improve airflow through the canopy, which reduces the humidity the fungus needs.",
+      "Remove mummified fruit and fallen debris from under trees.",
+      "Avoid wounding fruit during harvest and handling."
+    ]
+  },
+  "Guava_fruit___Fruitfly": {
+    "display_name": "Guava Fruit Fly Damage",
+    "pathogen": "Bactrocera spp. (fruit fly, insect pest)",
+    "symptoms": "Small puncture marks on the skin where eggs were laid, with the flesh beneath turning soft, discoloured and often infested with larvae. Affected fruit may drop prematurely.",
+    "treatment": [
+      "Remove and destroy infested fruit promptly, including any that has dropped, to break the fly's life cycle.",
+      "Use protein-bait traps or approved insecticide bait stations to reduce the adult fly population.",
+      "Bag developing fruit on the tree with fine mesh or paper bags to physically block egg-laying."
+    ],
+    "prevention": [
+      "Maintain orchard sanitation by collecting and destroying fallen fruit weekly during the season.",
+      "Time harvest to pick fruit slightly under-ripe, since flies preferentially target fully ripe fruit.",
+      "Monitor with pheromone or bait traps to catch population increases early."
+    ]
+  },
+  "Guava_fruit___healthy": {
+    "display_name": "Healthy Guava Fruit",
+    "pathogen": "No disease detected",
+    "symptoms": "Firm, evenly coloured skin with no sunken lesions, puncture marks, or soft spots.",
+    "treatment": ["No treatment needed. Continue regular monitoring."],
+    "prevention": [
+      "Maintain orchard sanitation and monitor for fruit fly activity through the season.",
+      "Harvest at the right maturity stage and handle fruit gently."
+    ]
+  },
+  "Mango_fruit___Alternaria": {
+    "display_name": "Mango Alternaria Rot",
+    "pathogen": "Alternaria alternata (fungus)",
+    "symptoms": "Circular, dark brown to black lesions on the fruit surface, often starting near the stem end, with the flesh beneath turning soft and discoloured as the rot progresses.",
+    "treatment": [
+      "Discard affected fruit; do not store with healthy fruit as spores spread easily.",
+      "Apply a post-harvest fungicide dip where permitted, and ensure fruit is dry before storage.",
+      "Reduce field infection with a fungicide programme during late fruit development."
+    ],
+    "prevention": [
+      "Harvest fruit at the correct maturity and avoid mechanical injury during picking.",
+      "Store fruit at recommended cool temperatures to slow fungal development.",
+      "Remove and destroy mummified fruit left on the tree after harvest."
+    ]
+  },
+  "Mango_fruit___Anthracnose": {
+    "display_name": "Mango Anthracnose",
+    "pathogen": "Colletotrichum gloeosporioides (fungus)",
+    "symptoms": "Small dark spots that enlarge into irregular black, sunken lesions, frequently appearing as fruit ripens after harvest. Severely affected fruit may show cracking and premature rotting.",
+    "treatment": [
+      "Discard visibly affected fruit promptly.",
+      "Apply pre-harvest fungicide sprays during flowering and fruit development, which is the most effective control window.",
+      "Use hot water treatment after harvest where facilities allow, which suppresses latent infections."
+    ],
+    "prevention": [
+      "Prune for good airflow and sunlight penetration through the canopy.",
+      "Avoid harvesting during or immediately after rain, when spore spread is highest.",
+      "Remove and destroy fallen leaves and mummified fruit, which harbour the fungus."
+    ]
+  },
+  "Mango_fruit___Black_mould_rot": {
+    "display_name": "Mango Black Mould Rot",
+    "pathogen": "Aspergillus niger (fungus)",
+    "symptoms": "Dark, powdery fungal growth developing on damaged or overripe fruit, typically starting at wounds or the stem end and spreading across the surface with a soft, rotted texture beneath.",
+    "treatment": [
+      "Remove and discard affected fruit immediately, since Aspergillus can produce mycotoxins.",
+      "Handle remaining fruit carefully to avoid the wounds that allow this mould to establish.",
+      "Store fruit at correct cool, dry conditions rather than warm humid storage."
+    ],
+    "prevention": [
+      "Avoid bruising or puncturing fruit during harvest, transport, and storage.",
+      "Cure or dry any surface wounds promptly and keep storage areas clean and well ventilated.",
+      "Discard overripe fruit before mould has a chance to establish."
+    ]
+  },
+  "Mango_fruit___Stem_end_rot": {
+    "display_name": "Mango Stem End Rot",
+    "pathogen": "Lasiodiplodia theobromae (fungus)",
+    "symptoms": "Dark brown to black rot beginning at the stem attachment point and spreading downward into the fruit, often accompanied by a shrivelled, sunken appearance around the stem.",
+    "treatment": [
+      "Discard fruit showing stem-end darkening; the rot spreads quickly through the flesh.",
+      "Apply a post-harvest fungicide treatment at the stem end where available.",
+      "Ensure fruit is harvested with an intact stem stub rather than pulled or snapped."
+    ],
+    "prevention": [
+      "Harvest with clean, sharp tools leaving a short stem stub to reduce the wound size at the point of infection.",
+      "Avoid delays between harvest and cooling, since warm conditions accelerate the rot.",
+      "Remove dead wood and mummified fruit from trees, which are a source of spores."
+    ]
+  },
+  "Mango_fruit___healthy": {
+    "display_name": "Healthy Mango Fruit",
+    "pathogen": "No disease detected",
+    "symptoms": "Smooth, evenly coloured skin with no dark lesions, sunken spots, or rot at the stem end.",
+    "treatment": ["No treatment needed. Continue regular monitoring."],
+    "prevention": [
+      "Handle fruit gently and harvest with an intact stem stub.",
+      "Store at recommended cool temperatures and inspect regularly."
+    ]
+  },
+  "Orange_fruit___Black_spot": {
+    "display_name": "Orange Black Spot",
+    "pathogen": "Phyllosticta citricarpa (fungus, also called citrus black spot)",
+    "symptoms": "Small, circular spots with dark margins and grey-brown centres scattered across the peel, sometimes surrounded by a yellow halo. Mainly a cosmetic disease affecting fruit appearance.",
+    "treatment": [
+      "Apply a protectant fungicide programme through summer, since black spot cannot be treated once lesions appear.",
+      "Remove fallen leaves and fruit debris under trees, which is where the fungus overwinters.",
+      "Prune to improve airflow and reduce leaf wetness duration."
+    ],
+    "prevention": [
+      "Maintain a preventive fungicide schedule in regions where black spot is established.",
+      "Practise orchard sanitation by removing fallen leaf litter regularly.",
+      "Consider resistant or less-susceptible citrus varieties where replanting is an option."
+    ]
+  },
+  "Orange_fruit___Canker": {
+    "display_name": "Orange Citrus Canker",
+    "pathogen": "Xanthomonas citri (bacteria)",
+    "symptoms": "Raised, corky, brown lesions on the fruit surface with a water-soaked yellow halo, often circular with a crater-like centre. Highly contagious between trees.",
+    "treatment": [
+      "There is no cure for infected fruit; affected fruit should be removed and destroyed.",
+      "Apply copper-based bactericide sprays to protect remaining healthy fruit, particularly after wind or rain events.",
+      "Avoid working among wet trees, since the bacteria spread easily via water and contact."
+    ],
+    "prevention": [
+      "Use disease-free planting material and inspect new stock carefully before planting.",
+      "Windbreaks reduce wind-driven rain, a major spread mechanism.",
+      "Report suspected outbreaks to local agricultural authorities, since canker is often subject to quarantine control."
+    ]
+  },
+  "Orange_fruit___Greening": {
+    "display_name": "Orange Citrus Greening",
+    "pathogen": "Candidatus Liberibacter spp. (bacteria, spread by the Asian citrus psyllid)",
+    "symptoms": "Fruit remains small, lopsided, and green at the stem end even when otherwise ripe, often with a bitter, unpleasant taste. Seeds inside may be dark and aborted.",
+    "treatment": [
+      "There is no cure. Infected trees should be removed and destroyed to prevent the disease spreading further.",
+      "Control the Asian citrus psyllid vector with approved insecticides to slow spread within a grove.",
+      "Report suspected cases to local agricultural authorities, since this disease is often subject to quarantine regulation."
+    ],
+    "prevention": [
+      "Source only certified disease-free nursery stock.",
+      "Monitor and control psyllid populations proactively.",
+      "Remove infected trees promptly rather than attempting to nurse them, since they act as a source of further spread."
+    ]
+  },
+  "Orange_fruit___healthy": {
+    "display_name": "Healthy Orange Fruit",
+    "pathogen": "No disease detected",
+    "symptoms": "Evenly coloured, firm peel with no raised lesions, corky spots, or abnormal green patches at maturity.",
+    "treatment": ["No treatment needed. Continue regular monitoring."],
+    "prevention": [
+      "Monitor for psyllid activity and canker symptoms through the season.",
+      "Maintain orchard sanitation and a preventive fungicide programme where black spot is present locally."
+    ]
+  },
+  "Pomegranate_fruit___Alternaria": {
+    "display_name": "Pomegranate Alternaria Fruit Spot",
+    "pathogen": "Alternaria alternata (fungus)",
+    "symptoms": "Dark brown to black irregular spots on the fruit rind, which may enlarge and cause the surface beneath to rot. Often develops on fruit already stressed by sunburn or cracking.",
+    "treatment": [
+      "Remove and discard affected fruit promptly.",
+      "Apply a protective fungicide programme during fruit development, particularly in humid weather.",
+      "Reduce fruit cracking and sunburn through adequate irrigation and canopy shade, since wounded fruit is more susceptible."
+    ],
+    "prevention": [
+      "Maintain even soil moisture to reduce fruit cracking, a common entry point for this fungus.",
+      "Prune to provide some canopy shade over fruit in very hot climates.",
+      "Remove fallen and mummified fruit from the orchard floor."
+    ]
+  },
+  "Pomegranate_fruit___Anthracnose": {
+    "display_name": "Pomegranate Anthracnose",
+    "pathogen": "Colletotrichum gloeosporioides (fungus)",
+    "symptoms": "Small, water-soaked spots that develop into sunken, dark brown to black lesions, sometimes with visible pink spore masses in humid conditions. Fruit may crack and rot as the disease progresses.",
+    "treatment": [
+      "Remove and destroy infected fruit; the fungus spreads readily to healthy fruit nearby.",
+      "Apply a fungicide programme during flowering and early fruit development.",
+      "Improve airflow through pruning to reduce the humidity the fungus needs to spread."
+    ],
+    "prevention": [
+      "Practise field sanitation by removing fallen fruit and dead wood regularly.",
+      "Avoid overhead irrigation, which keeps fruit surfaces wet for extended periods.",
+      "Harvest promptly at maturity rather than leaving fruit to overripen on the tree."
+    ]
+  },
+  "Pomegranate_fruit___Bacterial_blight": {
+    "display_name": "Pomegranate Bacterial Blight",
+    "pathogen": "Xanthomonas axonopodis pv. punicae (bacteria)",
+    "symptoms": "Irregular, dark, water-soaked lesions on the fruit surface that later turn brown to black, often with cracking of the rind. A serious disease that can also affect leaves and stems.",
+    "treatment": [
+      "Remove and destroy severely affected fruit and prune out infected twigs.",
+      "Apply copper-based bactericide sprays, particularly during and after rainy periods when spread is fastest.",
+      "Avoid working among wet plants, since the bacteria spread readily by water and contact."
+    ],
+    "prevention": [
+      "Use disease-free planting material from a reputable source.",
+      "Sanitise pruning tools between plants to avoid spreading the bacteria mechanically.",
+      "Avoid overhead irrigation and manage orchard drainage to reduce prolonged wetness."
+    ]
+  },
+  "Pomegranate_fruit___Cercospora": {
+    "display_name": "Pomegranate Cercospora Fruit Spot",
+    "pathogen": "Cercospora spp. (fungus)",
+    "symptoms": "Small, circular to irregular brown spots on the fruit rind, sometimes with a greyish centre, which can merge into larger blotched areas on heavily affected fruit.",
+    "treatment": [
+      "Remove and destroy fruit with extensive spotting.",
+      "Apply a fungicide programme during fruit development in humid growing seasons.",
+      "Improve canopy airflow through pruning to reduce leaf and fruit wetness duration."
+    ],
+    "prevention": [
+      "Practise field sanitation by removing fallen leaves and fruit debris.",
+      "Avoid dense planting that restricts airflow through the canopy.",
+      "Monitor closely during warm, humid weather when the disease develops fastest."
+    ]
+  },
+  "Pomegranate_fruit___healthy": {
+    "display_name": "Healthy Pomegranate Fruit",
+    "pathogen": "No disease detected",
+    "symptoms": "Smooth, evenly coloured rind with no dark spotting, cracking, or lesions.",
+    "treatment": ["No treatment needed. Continue regular monitoring."],
+    "prevention": [
+      "Maintain even soil moisture to reduce fruit cracking.",
+      "Practise field sanitation and monitor during humid weather for early disease signs."
+    ]
+  }
+}
