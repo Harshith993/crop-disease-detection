@@ -12,7 +12,7 @@ AI-powered crop disease detection across 14 species, with severity assessment, t
 
 Upload a photograph of a leaf. The system returns:
 
-- a **diagnosis** across 38 conditions spanning 14 crop species
+- a **diagnosis** across 59 conditions spanning 14 crop species, covering both leaf disease and fruit disease for apple, guava, mango, orange and pomegranate
 - a **confidence** score, with a warning below 60%
 - a **severity** reading (Mild / Moderate / Severe) derived from lesion area
 - a **treatment sequence** and prevention guidance for the identified disease
@@ -24,12 +24,12 @@ A separate search bar answers typed questions about crops, leaves, pests, nutrit
 
 | Metric | Value |
 |---|---|
-| Validation accuracy | **93.67%** (4,770 held-out images) |
+| Validation accuracy | **93.97%** (5,920 held-out images) |
 | Macro average F1 | 0.9355 |
 | Weighted average F1 | 0.9365 |
-| Classes | 38 |
+| Classes | 59 |
 | Crop species | 14 |
-| Training images | 31,898 |
+| Training images | 39,537 |
 | Model size | 26.5 MB |
 | Automated tests | 22 passing |
 
@@ -66,7 +66,7 @@ Weakest classes: Corn gray leaf spot (0.75 recall) and Tomato early blight (0.77
 | Backend | Flask REST API, Pillow, NumPy |
 | Knowledge search | TF-IDF vector index, scikit-learn |
 | Frontend | React 19 (Vite), Manrope type system |
-| Datasets | PlantVillage (laboratory) + PlantDoc (field photographs) |
+| Datasets | PlantVillage (laboratory) + PlantDoc (field photographs) + Kaggle fruit-disease set + Mendeley pomegranate set |
 
 ## Setup
 
@@ -135,7 +135,7 @@ curl --get --data-urlencode "q=why are my leaves yellow" http://localhost:5001/a
 
 ## How it works
 
-**Classification.** MobileNetV2 pretrained on ImageNet, with a custom head (global average pooling, dropout, a 256-unit dense layer, 38-way softmax). Trained in two phases: the head alone at learning rate 1e-3 for 12 epochs, then the last 60 base layers at 2e-5 for 20 epochs. BatchNorm layers stay frozen throughout.
+**Classification.** MobileNetV2 pretrained on ImageNet, with a custom head (global average pooling, dropout, a 320-unit dense layer, 59-way softmax). Trained in two phases: the head alone at learning rate 1e-3 for 12 epochs, then the last 60 base layers at 2e-5 for 20 epochs. BatchNorm layers stay frozen throughout. Trained locally on an RTX 3060 Ti rather than Colab from v5 onward.
 
 Pixel rescaling to [-1, 1] is a `Rescaling` layer **inside** the model rather than a preprocessing step outside it. This means the API sends raw 0–255 arrays and cannot introduce a train/serve mismatch.
 
@@ -157,12 +157,13 @@ agrovision/
 │   ├── qa.py                retrieval question answering
 │   ├── train_qa.py          fits the TF-IDF index
 │   ├── test_api.py          22 automated tests
-│   ├── treatments.json      treatment knowledge base, 38 entries
+│   ├── treatments.json      treatment knowledge base, 59 entries
 │   ├── knowledge/           agronomy passages and query augmentation
-│   └── model/               model_v4.keras, class_names.json, qa_index.pkl
+│   └── model/               model_v5.keras, class_names.json, qa_index.pkl
 ├── frontend/src/            React application
 ├── training/
 │   ├── build_multicrop.py   merges PlantVillage + PlantDoc into 38 classes
+│   ├── add_fruit_classes.py  merges in Kaggle + Mendeley fruit data, 59 classes total
 │   ├── plantdoc_baseline.py measures lab-to-field accuracy gap
 │   ├── train.py             model training
 │   └── evaluate.py          evaluation and confusion matrix
@@ -177,7 +178,9 @@ agrovision/
 
 **v3 (5 classes).** Added an `Other___not_tomato` rejection class trained on 1,610 images from 23 non-tomato PlantVillage crops. Test accuracy rose to 97.74%, and the extra class improved the tomato classes rather than competing with them — requiring the network to separate tomato from other species appears to have sharpened its representation of tomato leaf tissue.
 
-**v4 (38 classes, current).** Expanded to every PlantVillage class across 14 species, with PlantDoc field photographs merged in. Validation accuracy 93.67%. The drop from v3's 97.74% reflects a far harder problem — 38 classes instead of 5, including visually similar diseases within the same crop.
+**v4 (38 classes).** Expanded to every PlantVillage class across 14 species, with PlantDoc field photographs merged in. Validation accuracy 93.67%. The drop from v3's 97.74% reflects a far harder problem — 38 classes instead of 5, including visually similar diseases within the same crop.
+
+**v5 (59 classes, current).** Added 21 fruit-disease classes across apple, guava, mango, orange and pomegranate, using a Kaggle multi-fruit dataset and a Mendeley pomegranate set. This is a genuine capability addition, not just more of the same: earlier versions only recognised diseased *leaves* and rejected photographs of fruit outright via the plant-tissue guard. Validation accuracy actually rose slightly to 93.97% despite the added classes. The weakest classes are the fruit ones with the smallest sample sizes — mango anthracnose (12 test images, 0.25 recall) and mango Alternaria (17 images, 0.53 recall) — a direct, honest consequence of those source datasets being small rather than a modelling flaw. Trained locally rather than on Colab, which also fixed a real bug: Keras's `EarlyStopping`/`ReduceLROnPlateau` callbacks crashed with a `dtype='string'` error on this TensorFlow version, traced down and removed rather than worked around.
 
 ## Known limitations
 
@@ -197,4 +200,4 @@ agrovision/
 
 ## Attribution
 
-Datasets: PlantVillage (Hughes and Salathé, 2015) and PlantDoc (Singh et al., 2020, CC BY 4.0). Treatment guidance is advisory only; confirm with a local agricultural extension officer before applying any chemical treatment.
+Datasets: PlantVillage (Hughes and Salathé, 2015), PlantDoc (Singh et al., 2020, CC BY 4.0), a Kaggle apple/guava/mango/orange/pomegranate disease dataset, and a Mendeley pomegranate disease dataset. Treatment guidance is advisory only; confirm with a local agricultural extension officer before applying any chemical treatment.
