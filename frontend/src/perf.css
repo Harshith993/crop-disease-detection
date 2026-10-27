@@ -1,0 +1,44 @@
+/* ==========================================================================
+   Performance overrides. Import AFTER App.css.
+   Same look; removes the effects that make the browser repaint or re-layout
+   the page on every frame.
+   ========================================================================== */
+
+/* 1. Background glow: was a 900x620 gradient scaling forever (16 s loop).
+      Keep the fade-in, drop the infinite drift, and give it its own layer. */
+.stage::before {
+  animation: glowIn 1.2s ease both;
+  will-change: opacity;
+  contain: strict;
+}
+
+/* 2. Gradient title: background-position animations cannot run on the GPU,
+      so the heading was repainted every frame for as long as the page was open. */
+.grad {
+  animation: none;
+  background-position: 30% center;
+}
+
+/* 3. Dialog scrim: backdrop blur re-blurs the whole page behind it each frame. */
+.scrim {
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+/* 4. Hero: animating padding re-lays out the whole page each frame.
+      Snap quickly instead of a 0.85 s layout animation. */
+.hero { transition: padding 0.25s var(--ease); }
+
+/* 5. Probability bars: animate with transform (GPU) instead of width (layout).
+      Needs the one-line change in App.jsx: style={{ transform: `scaleX(...)` }}. */
+.prob-bar i {
+  width: 100%;
+  transform-origin: left center;
+  transition: transform 0.8s var(--ease-spring);
+  will-change: transform;
+}
+
+/* 6. Large surfaces: transition only cheap properties, not box-shadow. */
+.card { transition: border-color 0.3s var(--ease), transform 0.35s var(--ease-spring); }
+.composer { transition: border-color 0.3s var(--ease), background 0.3s var(--ease), transform 0.3s var(--ease); }

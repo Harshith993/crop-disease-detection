@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import "./App.css";
+import "./perf.css";
 
 const API = import.meta.env.DEV ? "http://" + window.location.hostname + ":5001" : "";
 
@@ -106,7 +107,10 @@ export default function App() {
       return;
     }
     setFile(f);
-    setPreview(URL.createObjectURL(f));
+    setPreview((prev) => {
+      if (prev) URL.revokeObjectURL(prev);
+      return URL.createObjectURL(f);
+    });
     setResult(null);
     setError(null);
   }
@@ -507,7 +511,7 @@ export default function App() {
                         <div className={`prob ${i === 0 ? "top" : ""}`} key={k}>
                           <span>{k.replace(/___/g, " · ").replace(/_/g, " ")}</span>
                           <span className="prob-bar">
-                            <i style={{ width: `${Math.max(v, 0.5)}%` }} />
+                            <i style={{ transform: `scaleX(${Math.max(v, 0.5) / 100})` }} />
                           </span>
                           <span className="num">{v.toFixed(2)}</span>
                         </div>
